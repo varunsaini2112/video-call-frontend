@@ -35,7 +35,12 @@ function useChatConnection(peerConnection: RTCPeerConnection) {
       socket.off("send_connection_offer", handleConnectionOffer);
       socket.off("send_candidate", handleReceiveCandidate);
     };
-  }, []);
+  }, [
+    handleConnection,
+    handleConnectionOffer,
+    handleOfferAnswer,
+    sendOffer,
+  ]);
 }
 
 export default useChatConnection;
