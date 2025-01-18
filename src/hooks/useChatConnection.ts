@@ -10,10 +10,12 @@ function useChatConnection(peerConnection: RTCPeerConnection) {
   const { handleOfferAnswer } = useAnswerProcessing(peerConnection);
 
   const handleConnection = () => {
+    console.log("connect");
     socket.emit("join_room", "room");
   };
   const handleReceiveCandidate = useCallback(
     ({ candidate }: { candidate: RTCIceCandidate }) => {
+      console.log("send_candidate");
       peerConnection.addIceCandidate(candidate);
     },
     [peerConnection]

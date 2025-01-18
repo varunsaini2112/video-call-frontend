@@ -4,6 +4,7 @@ function useAnswerProcessing(peerConnection: RTCPeerConnection) {
   }: {
     answer: RTCSessionDescriptionInit;
   }) {
+    console.log("answer");
     peerConnection.setRemoteDescription(answer);
   }
 

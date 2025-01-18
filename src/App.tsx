@@ -9,7 +9,7 @@ import {
 import { VideoFeed } from "./components";
 
 function App() {
-  const { localStream, startStream } = useLocalCameraStream();
+  const { localStream } = useLocalCameraStream();
   const { peerConnection, guestStream } = usePeerConnection(localStream);
   useChatConnection(peerConnection);
 
@@ -24,11 +24,12 @@ function App() {
         </a>
       </div>
       <div className="card">
-        {localStream ? (
+        {/* {localStream ? (
           <VideoFeed mediaStream={localStream} />
         ) : (
           <button onClick={startStream}>Start Webcam</button>
-        )}
+        )} */}
+        {localStream && <VideoFeed mediaStream={localStream} />}
         {guestStream && <VideoFeed mediaStream={guestStream} />}
       </div>
       <p className="read-the-docs">
