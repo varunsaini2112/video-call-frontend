@@ -23,6 +23,14 @@ function useChatConnection(peerConnection: RTCPeerConnection) {
 
   useEffect(() => {
     socket.connect();
+
+    return () => {
+      socket.emit("disconnected");
+      socket.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
     socket.on("connect", handleConnection);
     socket.on("another_person_ready", sendOffer);
     socket.on("answer", handleOfferAnswer);
@@ -30,19 +38,13 @@ function useChatConnection(peerConnection: RTCPeerConnection) {
     socket.on("send_candidate", handleReceiveCandidate);
 
     return () => {
-      socket.disconnect();
       socket.off("connect", handleConnection);
       socket.off("another_person_ready", sendOffer);
       socket.off("answer", handleOfferAnswer);
       socket.off("send_connection_offer", handleConnectionOffer);
       socket.off("send_candidate", handleReceiveCandidate);
     };
-  }, [
-    handleConnection,
-    handleConnectionOffer,
-    handleOfferAnswer,
-    sendOffer,
-  ]);
+  }, [handleConnection, handleConnectionOffer, handleOfferAnswer, sendOffer]);
 }
 
 export default useChatConnection;

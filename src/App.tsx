@@ -24,11 +24,6 @@ function App() {
         </a>
       </div>
       <div className="card">
-        {/* {localStream ? (
-          <VideoFeed mediaStream={localStream} />
-        ) : (
-          <button onClick={startStream}>Start Webcam</button>
-        )} */}
         {localStream && <VideoFeed mediaStream={localStream} />}
         {guestStream && <VideoFeed mediaStream={guestStream} />}
       </div>
