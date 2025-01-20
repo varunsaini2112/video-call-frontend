@@ -1,13 +1,13 @@
 import { useMemo, useState } from "react";
-import freeice from "freeice";
 import { socket } from "../utils";
+import { iceConfig } from "../config";
 
 function usePeerConnection(localStream: MediaStream | null) {
   const [guestStream, setGuestStream] = useState<MediaStream | null>(null);
 
   const peerConnection = useMemo(() => {
     const connection = new RTCPeerConnection({
-      iceServers: freeice(),
+      iceServers: iceConfig,
     });
 
     connection.addEventListener("track", ({ streams }) => {
