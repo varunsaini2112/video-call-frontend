@@ -3,15 +3,17 @@ import { socket } from "../utils";
 import useOfferSending from "./useOfferSending";
 import useSendingAnswer from "./useSendingAnswer";
 import useAnswerProcessing from "./useAnswerProcessing";
+import { useParams } from "react-router";
 
 function useChatConnection(peerConnection: RTCPeerConnection) {
+  const { roomId } = useParams();
   const { sendOffer } = useOfferSending(peerConnection);
   const { handleConnectionOffer } = useSendingAnswer(peerConnection);
   const { handleOfferAnswer } = useAnswerProcessing(peerConnection);
 
   const handleConnection = () => {
     console.log("connect");
-    socket.emit("join_room", "room");
+    socket.emit("join_room", roomId);
   };
   const handleReceiveCandidate = useCallback(
     ({ candidate }: { candidate: RTCIceCandidate }) => {
@@ -44,7 +46,13 @@ function useChatConnection(peerConnection: RTCPeerConnection) {
       socket.off("send_connection_offer", handleConnectionOffer);
       socket.off("send_candidate", handleReceiveCandidate);
     };
-  }, [handleConnection, handleConnectionOffer, handleOfferAnswer, sendOffer]);
+  }, [
+    roomId,
+    handleConnection,
+    handleConnectionOffer,
+    handleOfferAnswer,
+    sendOffer,
+  ]);
 }
 
 export default useChatConnection;

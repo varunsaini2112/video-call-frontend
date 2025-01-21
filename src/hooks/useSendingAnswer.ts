@@ -1,7 +1,10 @@
 import { useCallback } from "react";
 import { socket } from "../utils";
+import { useParams } from "react-router";
 
 function useSendingAnswer(peerConnection: RTCPeerConnection) {
+  const { roomId } = useParams();
+
   const handleConnectionOffer = useCallback(
     async ({ offer }: { offer: RTCSessionDescriptionInit }) => {
       console.log("send_connection_offer");
@@ -9,9 +12,9 @@ function useSendingAnswer(peerConnection: RTCPeerConnection) {
       const answer = await peerConnection.createAnswer();
       await peerConnection.setLocalDescription(answer);
 
-      socket.emit("answer", { answer, roomName: "room" });
+      socket.emit("answer", { answer, roomName: roomId });
     },
-    [peerConnection]
+    [peerConnection, roomId]
   );
 
   return {

@@ -1,8 +1,10 @@
 import { useMemo, useState } from "react";
 import { socket } from "../utils";
 import { iceConfig } from "../config";
+import { useParams } from "react-router";
 
 function usePeerConnection(localStream: MediaStream | null) {
+  const { roomId } = useParams();
   const [guestStream, setGuestStream] = useState<MediaStream | null>(null);
 
   const peerConnection = useMemo(() => {
@@ -15,7 +17,7 @@ function usePeerConnection(localStream: MediaStream | null) {
       setGuestStream(streams[0]);
     });
     connection.addEventListener("icecandidate", ({ candidate }) => {
-      socket.emit("send_candidate", { candidate, roomName: "room" });
+      socket.emit("send_candidate", { candidate, roomName: roomId });
     });
 
     localStream?.getTracks().forEach((track) => {
@@ -23,7 +25,7 @@ function usePeerConnection(localStream: MediaStream | null) {
     });
 
     return connection;
-  }, [localStream]);
+  }, [localStream, roomId]);
 
   return {
     guestStream,
