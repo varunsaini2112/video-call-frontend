@@ -21,6 +21,7 @@ export const VideoFeed: FunctionComponent<Props> = ({
       autoPlay={true}
       muted={isMuted}
       controls={controls}
+      height={400}
     />
   );
 };
