@@ -1,0 +1,50 @@
+.main-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+
+.grid-container {
+  flex: 3;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 2px;
+  row-gap: 10px;
+  background-color: #2196f3;
+  padding: 4px;
+}
+
+.buttons-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 0;
+}
+
+.players-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px 10px;
+}
+
+.grid-container > div {
+  background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding: 5px;
+  font-size: 14px;
+  color: black;
+}
+
+.player-token {
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  position: absolute;
+  transition-timing-function: ease;
+  transform: translateX(-50%);
+  transition-duration: 1s;
+}

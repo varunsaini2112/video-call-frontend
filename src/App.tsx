@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router";
-import { Landing, VideoCall } from "./pages";
+import { Landing, Monopoly, VideoCall } from "./pages";
 import "./App.css";
 
 function App() {
@@ -7,6 +7,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Landing />} />
       <Route path="video-call/:roomId" element={<VideoCall />} />
+      <Route path="/game" element={<Monopoly />} />
     </Routes>
   );
 }

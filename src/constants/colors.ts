@@ -1,0 +1,13 @@
+const PLAYER_TOKEN_COLORS = ["#1ABC9C", "#9B59B6", "#E74C3C", "#F39C12"];
+const CARD_GROUP_COLORS = [
+  "#A52A2A",
+  "#ADD8E6",
+  "#FFC0CB",
+  "#FFA500",
+  "#FF0000",
+  "#FFFF00",
+  "#008000",
+  "#0000FF",
+];
+
+export { PLAYER_TOKEN_COLORS, CARD_GROUP_COLORS };
